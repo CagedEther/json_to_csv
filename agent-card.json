@@ -1,0 +1,53 @@
+{
+  "identity": {
+    "agentName": "json_to_csv",
+    "displayName": "JSON to CSV Converter",
+    "description": "Converts JSON input (array of objects, array of arrays, or a single object) into a properly formatted CSV output.",
+    "version": "1.0.0",
+    "provider": {
+      "organization": "json_to_csv"
+    }
+  },
+  "capabilities": {
+    "taskKinds": [
+      "request"
+    ]
+  },
+  "io": {
+    "inputs": [
+      {
+        "id": "request",
+        "description": "Paste your JSON here. Supports an array of objects, array of arrays, or a single object.",
+        "contentType": "text/plain",
+        "required": true,
+        "example": "[{\"name\":\"Alice\",\"age\":30,\"city\":\"New York\"},{\"name\":\"Bob\",\"age\":25,\"city\":\"London\"}]"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "result",
+        "description": "CSV output converted from the JSON input.",
+        "contentType": "text/csv",
+        "guaranteed": true
+      }
+    ]
+  },
+  "skills": [
+    {
+      "id": "json_to_csv",
+      "name": "JSON to CSV",
+      "description": "Accepts a JSON string and returns a CSV file. Supports arrays of objects (auto-detects headers), arrays of arrays (row-based), and single objects (one-row CSV).",
+      "examples": [
+        "[{\"name\":\"Alice\",\"age\":30},{\"name\":\"Bob\",\"age\":25}]",
+        "[[\"id\",\"product\",\"price\"],[1,\"Widget\",9.99],[2,\"Gadget\",19.99]]"
+      ]
+    }
+  ],
+  "runtime": {
+    "handler": "./handler.ts",
+    "handlerExport": "default",
+    "concurrency": 5,
+    "expectedInstances": 1,
+    "maxRunningTimeSec": 30
+  }
+}
